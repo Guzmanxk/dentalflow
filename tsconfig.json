@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["es2017", "esnext.asynciterable"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./server/*"],
+      "@/controllers/*": ["./server/controllers/*"],
+      "@/models/*": ["./server/models/*"],
+      "@/routes/*": ["./server/routes/*"],
+      "@/middleware/*": ["./server/middleware/*"],
+      "@/config/*": ["./server/config/*"]
+    }
+  },
+  "include": [
+    "server/**/*.js",
+    "server/**/*.ts",
+    "server/**/*.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "client",
+    ".next",
+    "dist",
+    "build"
+  ]
+} 

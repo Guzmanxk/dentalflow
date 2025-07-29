@@ -1,0 +1,71 @@
+name: dentaflow
+services:
+  - name: api
+    source_dir: /
+    github:
+      repo: your-username/dentaflow
+      branch: main
+    run_command: npm start
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 5000
+    routes:
+      - path: /api
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5000"
+      - key: MONGODB_URI
+        value: ${MONGODB_URI}
+      - key: JWT_SECRET
+        value: ${JWT_SECRET}
+      - key: STRIPE_SECRET_KEY
+        value: ${STRIPE_SECRET_KEY}
+      - key: STRIPE_PUBLISHABLE_KEY
+        value: ${STRIPE_PUBLISHABLE_KEY}
+      - key: SMTP_HOST
+        value: ${SMTP_HOST}
+      - key: SMTP_PORT
+        value: ${SMTP_PORT}
+      - key: SMTP_USER
+        value: ${SMTP_USER}
+      - key: SMTP_PASS
+        value: ${SMTP_PASS}
+      - key: SENTRY_DSN
+        value: ${SENTRY_DSN}
+
+  - name: frontend
+    source_dir: /client
+    github:
+      repo: your-username/dentaflow
+      branch: main
+    run_command: npm start
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 3000
+    routes:
+      - path: /
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      - key: NEXT_PUBLIC_API_URL
+        value: ${API_URL}
+      - key: NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+        value: ${STRIPE_PUBLISHABLE_KEY}
+
+databases:
+  - name: mongodb
+    engine: MONGODB
+    version: "6.0"
+    size: db-s-1vcpu-1gb
+
+databases:
+  - name: redis
+    engine: REDIS
+    version: "7.0"
+    size: db-s-1vcpu-1gb 

@@ -1,0 +1,25 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Lint and format code before commit
+echo "🔍 Running pre-commit checks..."
+
+# Run ESLint
+echo "📝 Checking code style..."
+npm run lint
+
+# Run Prettier
+echo "🎨 Formatting code..."
+npm run format
+
+# Run tests
+echo "🧪 Running tests..."
+npm run test:ci
+
+# Check if all checks passed
+if [ $? -eq 0 ]; then
+  echo "✅ All checks passed!"
+else
+  echo "❌ Some checks failed. Please fix the issues before committing."
+  exit 1
+fi 

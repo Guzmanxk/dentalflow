@@ -1,0 +1,89 @@
+{
+  "name": "DentaFlow",
+  "description": "Sistema completo de gestão para clínicas odontológicas",
+  "repository": "https://github.com/your-username/dentaflow",
+  "logo": "https://dentaflow.com/logo.png",
+  "keywords": ["node", "express", "mongodb", "react", "nextjs", "saas", "odontologia"],
+  "website": "https://dentaflow.com",
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment",
+      "value": "production"
+    },
+    "PORT": {
+      "description": "Port to run the server on",
+      "value": "5000"
+    },
+    "MONGODB_URI": {
+      "description": "MongoDB connection string",
+      "required": true
+    },
+    "JWT_SECRET": {
+      "description": "Secret key for JWT tokens",
+      "required": true,
+      "generator": "secret"
+    },
+    "STRIPE_SECRET_KEY": {
+      "description": "Stripe secret key",
+      "required": false
+    },
+    "STRIPE_PUBLISHABLE_KEY": {
+      "description": "Stripe publishable key",
+      "required": false
+    },
+    "SMTP_HOST": {
+      "description": "SMTP host for email",
+      "required": false
+    },
+    "SMTP_PORT": {
+      "description": "SMTP port",
+      "value": "587",
+      "required": false
+    },
+    "SMTP_USER": {
+      "description": "SMTP username",
+      "required": false
+    },
+    "SMTP_PASS": {
+      "description": "SMTP password",
+      "required": false
+    },
+    "SENTRY_DSN": {
+      "description": "Sentry DSN for error tracking",
+      "required": false
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "addons": [
+    {
+      "plan": "mongolab:sandbox"
+    },
+    {
+      "plan": "heroku-redis:hobby-dev"
+    },
+    {
+      "plan": "papertrail:choklad"
+    },
+    {
+      "plan": "sentry:free"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "npm run migrate"
+  },
+  "stack": "heroku-22"
+} 

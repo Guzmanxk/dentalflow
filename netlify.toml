@@ -1,0 +1,57 @@
+[build]
+  base = "."
+  command = "npm run build"
+  publish = "client/.next"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[functions]
+  directory = "server"
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.stripe.com; frame-src https://js.stripe.com;"
+
+[context.production.environment]
+  NODE_ENV = "production"
+  MONGODB_URI = "production_mongodb_uri"
+  JWT_SECRET = "production_jwt_secret"
+  STRIPE_SECRET_KEY = "production_stripe_secret_key"
+  STRIPE_PUBLISHABLE_KEY = "production_stripe_publishable_key"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "preview"
+  MONGODB_URI = "preview_mongodb_uri"
+  JWT_SECRET = "preview_jwt_secret"
+  STRIPE_SECRET_KEY = "preview_stripe_secret_key"
+  STRIPE_PUBLISHABLE_KEY = "preview_stripe_publishable_key"
+
+[context.branch-deploy.environment]
+  NODE_ENV = "development"
+  MONGODB_URI = "development_mongodb_uri"
+  JWT_SECRET = "development_jwt_secret"
+  STRIPE_SECRET_KEY = "development_stripe_secret_key"
+  STRIPE_PUBLISHABLE_KEY = "development_stripe_publishable_key" 
