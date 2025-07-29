@@ -1,15 +1,10 @@
 [build]
-  base = "."
-  command = "npm run build"
-  publish = "client/.next"
-
-[build.environment]
-  NODE_VERSION = "18"
-  NPM_VERSION = "9"
+  publish = "."
+  command = "echo 'Build complete'"
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
+  to = "/api/index.js"
   status = 200
 
 [[redirects]]
